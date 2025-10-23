@@ -1,0 +1,60 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: webapp-appset
+  namespace: argocd
+spec:
+  generators:
+    # Git directory generator - discovers overlays automatically
+    - git:
+        repoURL: https://github.com/soft-yt/infra-gitops
+        revision: HEAD
+        directories:
+          - path: apps/webapp/overlays/*
+
+  template:
+    metadata:
+      # Application name based on overlay directory (e.g., webapp-dev, webapp-staging)
+      name: 'webapp-{{path.basename}}'
+      labels:
+        app: webapp
+        environment: '{{path.basename}}'
+
+    spec:
+      project: default
+
+      source:
+        repoURL: https://github.com/soft-yt/infra-gitops
+        targetRevision: HEAD
+        path: '{{path}}'
+
+      destination:
+        # Target Kubernetes cluster
+        server: https://kubernetes.default.svc
+        namespace: default
+
+      syncPolicy:
+        automated:
+          # Automatically sync when Git changes
+          prune: true        # Delete resources removed from Git
+          selfHeal: true     # Revert manual changes
+          allowEmpty: false  # Don't sync if no resources
+
+        syncOptions:
+          - CreateNamespace=true  # Auto-create namespace if missing
+          - PrunePropagationPolicy=foreground
+          - PruneLast=true
+
+        retry:
+          limit: 5
+          backoff:
+            duration: 5s
+            factor: 2
+            maxDuration: 3m
+
+      # Health and readiness
+      ignoreDifferences:
+        - group: apps
+          kind: Deployment
+          jsonPointers:
+            - /spec/replicas  # Ignore HPA-controlled replicas

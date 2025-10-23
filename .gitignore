@@ -1,0 +1,22 @@
+# Secrets (unencrypted)
+*.secret
+*.key
+*.pem
+
+# Temporary files
+*.tmp
+*.swp
+*~
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE
+.idea/
+.vscode/
+*.iml
+
+# Backup files
+*.backup
+*.bak
