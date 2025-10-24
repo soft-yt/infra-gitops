@@ -999,7 +999,7 @@ func SeedTestData(db *sql.DB) error {
 **Prerequisites:**
 - Docker Desktop / Colima
 - PostgreSQL test database
-- Go 1.22+
+- Go 1.24+
 - Node.js 20+
 
 **Setup:**
@@ -1021,7 +1021,7 @@ npm test
 ```yaml
 strategy:
   matrix:
-    go-version: ['1.22', '1.23']
+    go-version: ['1.23', '1.24']
     node-version: ['20', '21']
     os: [ubuntu-latest, macos-latest]
 ```
