@@ -30,31 +30,61 @@
 
 ### Задачи Week 2
 
-#### Infrastructure (YC Dev Cluster)
+#### Infrastructure (YC Dev Cluster) - ✅ ЗАВЕРШЕНО
 - [x] Настроить Yandex Cloud CLI
 - [x] Создать service accounts с IAM ролями
 - [x] Создать Kubernetes cluster `soft-yt-dev`
-- [ ] Создать node group
-- [ ] Настроить kubectl
-- [ ] Установить Argo CD
-- [ ] Создать ApplicationSet для multi-cluster sync
+- [x] Создать node group (3 ноды, preemptible)
+- [x] Настроить kubectl
+- [x] Установить Argo CD v2.11.0
+- [x] Создать ApplicationSet для multi-cluster sync
+- [x] Настроить NAT Gateway для internet access
+- [x] Развернуть Traefik ingress controller
+- [x] Настроить cert-manager с Let's Encrypt
 
-**Документация:** [infrastructure-platform.md](infrastructure-platform.md)
-**Automation:** `clusters/yc-dev/create-node-group.sh`, `clusters/yc-dev/argo-cd/install.sh`
+**Документация:**
+- [infrastructure-platform.md](infrastructure-platform.md)
+- [WEEK2-INFRASTRUCTURE-COMPLETE.md](reports/WEEK2-INFRASTRUCTURE-COMPLETE.md)
 
-#### Phase 2: Observability, Security & Secrets
+**Automation:**
+- `clusters/yc-dev/create-node-group.sh`
+- `clusters/yc-dev/argo-cd/install.sh`
+
+#### Phase 2: Observability, Security & Secrets - ⏳ В ПРОЦЕССЕ
 
 **Спецификация:** [phase2-observability-security-spec.md](phase2-observability-security-spec.md)
 
-**Задачи:**
-- [ ] Интегрировать SOPS + Vault для секретов, описать процедуры управления ключами.
-- [ ] Установить стек наблюдаемости (Prometheus, Grafana, Loki, Tempo) с базовыми дашбордами.
-- [ ] Реализовать rate limiting и security middleware в backend.
-- [ ] Добавить security testing в CI/CD (OWASP Top 10).
-- [ ] Развернуть ingress (Traefik) и привязать домены.
-- [ ] Настроить cert-manager (Let's Encrypt + custom CA).
-- [ ] Интегрировать ExternalDNS для автоматического управления DNS.
-- [ ] Подготовить CLI-генератор или Backstage template для создания сервисов.
+**Phase 2.1 - Observability (Monitoring) - ✅ ЗАВЕРШЕНО:**
+- [x] Развернуть Prometheus (retention 7d, persistent storage 10Gi)
+- [x] Развернуть Grafana (persistent storage 5Gi, pre-configured dashboards)
+- [x] Развернуть Alertmanager (HA mode)
+- [x] Настроить Node Exporters (3 nodes)
+- [x] Настроить Kube State Metrics
+- [x] Создать Ingress для Grafana: https://grafana.dev.tulupov.org
+- [x] Настроить Let's Encrypt TLS для Grafana
+
+**Отчет:** [OBSERVABILITY-STACK-DEPLOYED.md](reports/OBSERVABILITY-STACK-DEPLOYED.md)
+
+**Phase 2.2 - Logging (TODO):**
+- [ ] Развернуть Loki для log aggregation
+- [ ] Настроить Promtail для log collection
+- [ ] Интегрировать Loki с Grafana
+
+**Phase 2.3 - Tracing (TODO):**
+- [ ] Развернуть Tempo для distributed tracing
+- [ ] Настроить OpenTelemetry collectors
+- [ ] Интегрировать Tempo с Grafana
+
+**Phase 2.4 - Security & Secrets (TODO):**
+- [ ] Интегрировать SOPS + Vault для секретов
+- [ ] Реализовать rate limiting и security middleware
+- [ ] Добавить security testing в CI/CD (OWASP Top 10)
+
+**Phase 2.5 - DNS Automation (TODO):**
+- [ ] Интегрировать ExternalDNS для автоматического управления DNS
+
+**Phase 2.6 - Service Templates (TODO):**
+- [ ] Подготовить CLI-генератор или Backstage template для создания сервисов
 
 ## После второй недели
 - [ ] Добавить шаблоны сервисов на Python/Java для расширения покрытия.

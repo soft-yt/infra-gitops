@@ -31,7 +31,8 @@ spec:
       destination:
         # Target Kubernetes cluster
         server: https://kubernetes.default.svc
-        namespace: default
+        # Namespace based on overlay name (dev, staging, prod)
+        namespace: '{{path.basename}}'
 
       syncPolicy:
         automated:
