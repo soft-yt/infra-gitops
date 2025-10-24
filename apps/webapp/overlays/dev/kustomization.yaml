@@ -8,7 +8,28 @@ bases:
 
 patchesStrategicMerge:
   - deployment-patch.yaml
-  - postgres-patch.yaml
+
+patches:
+  - target:
+      kind: Deployment
+      name: postgres
+    patch: |-
+      - op: replace
+        path: /metadata/labels/app
+        value: postgres
+      - op: replace
+        path: /spec/selector/matchLabels/app
+        value: postgres
+      - op: replace
+        path: /spec/template/metadata/labels/app
+        value: postgres
+  - target:
+      kind: Service
+      name: postgres
+    patch: |-
+      - op: replace
+        path: /spec/selector/app
+        value: postgres
 
 configMapGenerator:
   - name: webapp-config
