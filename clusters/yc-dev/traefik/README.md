@@ -10,7 +10,7 @@ Traefik is deployed as the default ingress controller for the `soft-yt-dev` Kube
 
 ## Details
 
-**LoadBalancer External IP:** `158.160.198.44`
+**LoadBalancer External IP:** `158.160.197.149`
 
 **Service:**
 ```bash
@@ -32,8 +32,10 @@ helm repo update
 helm install traefik traefik/traefik \
   --namespace traefik \
   --set service.type=LoadBalancer \
-  --set ports.web.port=80 \
-  --set ports.websecure.port=443 \
+  --set ports.web.port=8000 \
+  --set ports.web.exposedPort=80 \
+  --set ports.websecure.port=8443 \
+  --set ports.websecure.exposedPort=443 \
   --set ingressClass.enabled=true \
   --set ingressClass.isDefaultClass=true
 ```

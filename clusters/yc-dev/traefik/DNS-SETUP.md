@@ -2,7 +2,7 @@
 
 ## External IP
 
-**Traefik LoadBalancer IP:** `158.160.198.44`
+**Traefik LoadBalancer IP:** `158.160.197.149`
 
 ## DNS Records to Create
 
@@ -11,7 +11,7 @@ Add the following A record to your DNS provider (e.g., Cloudflare, Route53, etc.
 ```
 Type: A
 Name: argocd.dev.tulupov.org
-Value: 158.160.198.44
+Value: 158.160.197.149
 TTL: 300 (or Auto)
 ```
 
@@ -22,14 +22,14 @@ If you want all dev subdomains to point to the same IP, you can use a wildcard:
 ```
 Type: A
 Name: *.dev.tulupov.org
-Value: 158.160.198.44
+Value: 158.160.197.149
 TTL: 300
 ```
 
 This will route:
-- `argocd.dev.tulupov.org` → 158.160.198.44
-- `grafana.dev.tulupov.org` → 158.160.198.44
-- `*.dev.tulupov.org` → 158.160.198.44
+- `argocd.dev.tulupov.org` → 158.160.197.149
+- `grafana.dev.tulupov.org` → 158.160.197.149
+- `*.dev.tulupov.org` → 158.160.197.149
 
 ## Verify DNS Propagation
 
@@ -43,7 +43,7 @@ nslookup argocd.dev.tulupov.org
 dig argocd.dev.tulupov.org
 
 # Expected output should show:
-# argocd.dev.tulupov.org. 300 IN A 158.160.198.44
+# argocd.dev.tulupov.org. 300 IN A 158.160.197.149
 ```
 
 ## Access Argo CD
