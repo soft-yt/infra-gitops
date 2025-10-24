@@ -6,8 +6,19 @@ spec:
   entryPoints:
     - websecure
   routes:
+    # API routes go to backend
+    - match: Host(`pod.dev.tulupov.org`) && PathPrefix(`/webapp/api`)
+      kind: Rule
+      priority: 10
+      services:
+        - name: backend
+          port: 8080
+      middlewares:
+        - name: webapp-api-stripprefix
+    # All other routes go to frontend
     - match: Host(`pod.dev.tulupov.org`) && PathPrefix(`/webapp`)
       kind: Rule
+      priority: 5
       services:
         - name: webapp
           port: 80
@@ -20,6 +31,15 @@ apiVersion: traefik.io/v1alpha1
 kind: Middleware
 metadata:
   name: webapp-stripprefix
+spec:
+  stripPrefix:
+    prefixes:
+      - /webapp
+---
+apiVersion: traefik.io/v1alpha1
+kind: Middleware
+metadata:
+  name: webapp-api-stripprefix
 spec:
   stripPrefix:
     prefixes:
