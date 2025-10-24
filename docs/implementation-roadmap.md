@@ -65,10 +65,13 @@
 
 **Отчет:** [OBSERVABILITY-STACK-DEPLOYED.md](reports/OBSERVABILITY-STACK-DEPLOYED.md)
 
-**Phase 2.2 - Logging (TODO):**
-- [ ] Развернуть Loki для log aggregation
-- [ ] Настроить Promtail для log collection
-- [ ] Интегрировать Loki с Grafana
+**Phase 2.2 - Logging - ✅ ЗАВЕРШЕНО:**
+- [x] Развернуть Loki для log aggregation (v2.6.1, 10Gi storage)
+- [x] Настроить Promtail для log collection (DaemonSet на 3 нодах)
+- [x] Интегрировать Loki с Grafana (data source configured)
+- [x] Верифицировать сбор логов (24 jobs из 5 namespaces)
+
+**Отчет:** [LOGGING-STACK-DEPLOYED.md](reports/LOGGING-STACK-DEPLOYED.md)
 
 **Phase 2.3 - Tracing (TODO):**
 - [ ] Развернуть Tempo для distributed tracing
