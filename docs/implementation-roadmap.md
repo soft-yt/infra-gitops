@@ -83,10 +83,17 @@
 
 **Отчет:** [TRACING-STACK-DEPLOYED.md](reports/TRACING-STACK-DEPLOYED.md)
 
-**Phase 2.4 - Security & Secrets (TODO):**
-- [ ] Интегрировать SOPS + Vault для секретов
-- [ ] Реализовать rate limiting и security middleware
+**Phase 2.4 - Security & Secrets - ⏳ В ПРОЦЕССЕ:**
+- [x] Интегрировать SOPS для шифрования секретов (age encryption)
+- [x] Создать age ключи для yc-dev окружения
+- [x] Настроить Argo CD с SOPS tools
+- [x] Создать документацию SOPS workflow
+- [ ] Интегрировать Vault для централизованного управления секретами
+- [ ] Реализовать rate limiting middleware
+- [ ] Добавить security headers и CORS middleware
 - [ ] Добавить security testing в CI/CD (OWASP Top 10)
+
+**Отчет SOPS:** [SOPS-SECRETS-MANAGEMENT.md](SOPS-SECRETS-MANAGEMENT.md)
 
 **Phase 2.5 - DNS Automation (TODO):**
 - [ ] Интегрировать ExternalDNS для автоматического управления DNS
