@@ -1,0 +1,52 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: webapp-ingress
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+    traefik.ingress.kubernetes.io/router.entrypoints: web,websecure
+    traefik.ingress.kubernetes.io/router.middlewares: dev-webapp-api-stripprefix@kubernetescrd,dev-webapp-stripprefix@kubernetescrd
+spec:
+  ingressClassName: traefik
+  rules:
+  - host: pod.dev.tulupov.org
+    http:
+      paths:
+      # API routes - higher priority (longer path)
+      - path: /webapp/api
+        pathType: Prefix
+        backend:
+          service:
+            name: backend
+            port:
+              number: 8080
+      # Frontend routes - lower priority (shorter path)
+      - path: /webapp
+        pathType: Prefix
+        backend:
+          service:
+            name: webapp
+            port:
+              number: 80
+  tls:
+  - hosts:
+    - pod.dev.tulupov.org
+    secretName: pod-dev-tulupov-org-tls
+---
+apiVersion: traefik.io/v1alpha1
+kind: Middleware
+metadata:
+  name: webapp-stripprefix
+spec:
+  stripPrefix:
+    prefixes:
+      - /webapp
+---
+apiVersion: traefik.io/v1alpha1
+kind: Middleware
+metadata:
+  name: webapp-api-stripprefix
+spec:
+  stripPrefix:
+    prefixes:
+      - /webapp

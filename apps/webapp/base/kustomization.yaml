@@ -6,7 +6,7 @@ resources:
   - service.yaml
   - configmap.yaml
   - postgres/postgres-deployment.yaml
-  - ingressroute.yaml
+  - ingress.yaml
 
 commonLabels:
   app: webapp
