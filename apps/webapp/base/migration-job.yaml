@@ -1,0 +1,47 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: webapp-db-migration
+  labels:
+    app: webapp
+    component: migration
+spec:
+  ttlSecondsAfterFinished: 86400  # Keep for 24 hours after completion
+  backoffLimit: 3
+  template:
+    metadata:
+      labels:
+        app: webapp
+        component: migration
+    spec:
+      restartPolicy: OnFailure
+      imagePullSecrets:
+      - name: ghcr-pull-secret
+      containers:
+      - name: migration
+        image: ghcr.io/soft-yt/app-base-go-react-backend:master-91cc208
+        command: ["/home/appuser/api"]
+        args: ["migrate"]
+        env:
+        - name: DB_HOST
+          value: "postgres"
+        - name: DB_PORT
+          value: "5432"
+        - name: DB_NAME
+          value: "softyt"
+        - name: DB_USER
+          value: "postgres"
+        - name: DB_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: postgres-secret
+              key: POSTGRES_PASSWORD
+        - name: DB_SSL_MODE
+          value: "disable"
+        resources:
+          requests:
+            cpu: 50m
+            memory: 64Mi
+          limits:
+            cpu: 200m
+            memory: 128Mi

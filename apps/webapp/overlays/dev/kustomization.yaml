@@ -40,9 +40,9 @@ configMapGenerator:
 
 images:
   - name: ghcr.io/soft-yt/app-base-go-react-backend
-    newTag: master-0038f13
+    newTag: master-91cc208
   - name: ghcr.io/soft-yt/app-base-go-react-frontend
-    newTag: master-0038f13
+    newTag: master-91cc208
 
 commonLabels:
   environment: dev
