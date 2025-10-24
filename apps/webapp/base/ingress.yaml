@@ -1,18 +1,18 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: webapp-ingress
+  name: webapp-api-ingress
   annotations:
     cert-manager.io/cluster-issuer: letsencrypt-prod
     traefik.ingress.kubernetes.io/router.entrypoints: web,websecure
-    traefik.ingress.kubernetes.io/router.middlewares: dev-webapp-api-stripprefix@kubernetescrd,dev-webapp-stripprefix@kubernetescrd
+    traefik.ingress.kubernetes.io/router.middlewares: dev-webapp-api-stripprefix@kubernetescrd
+    traefik.ingress.kubernetes.io/router.priority: "10"
 spec:
   ingressClassName: traefik
   rules:
   - host: pod.dev.tulupov.org
     http:
       paths:
-      # API routes - higher priority (longer path)
       - path: /webapp/api
         pathType: Prefix
         backend:
@@ -20,7 +20,26 @@ spec:
             name: backend
             port:
               number: 8080
-      # Frontend routes - lower priority (shorter path)
+  tls:
+  - hosts:
+    - pod.dev.tulupov.org
+    secretName: pod-dev-tulupov-org-tls
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: webapp-frontend-ingress
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+    traefik.ingress.kubernetes.io/router.entrypoints: web,websecure
+    traefik.ingress.kubernetes.io/router.middlewares: dev-webapp-stripprefix@kubernetescrd
+    traefik.ingress.kubernetes.io/router.priority: "5"
+spec:
+  ingressClassName: traefik
+  rules:
+  - host: pod.dev.tulupov.org
+    http:
+      paths:
       - path: /webapp
         pathType: Prefix
         backend:
