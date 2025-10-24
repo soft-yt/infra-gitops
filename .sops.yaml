@@ -1,0 +1,8 @@
+creation_rules:
+  # YC Dev cluster secrets
+  - path_regex: clusters/yc-dev/.*secrets.*\.yaml$
+    age: age175lvx7gs4mxxe825phgenduucdx9rah4df8pdswngxe4el38jejsp2grhj
+
+  # Development environment app secrets
+  - path_regex: apps/.*/overlays/dev/secrets.*\.yaml$
+    age: age175lvx7gs4mxxe825phgenduucdx9rah4df8pdswngxe4el38jejsp2grhj
