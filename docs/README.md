@@ -2,14 +2,21 @@
 
 Этот индекс собирает материалы Doc-Driven Development, развёрнутые из `plan.md`.
 
+## Репозитории платформы
+
+Платформа построена на основе мультирепозиторной архитектуры:
+
+- **[app-base-go-react](https://github.com/soft-yt/app-base-go-react)** — GitHub template репозиторий для создания новых сервисов Go + React
+- **[infra-gitops](https://github.com/soft-yt/infra-gitops)** — GitOps репозиторий с Kustomize манифестами, конфигурацией Argo CD и платформенной документацией
+
 ## Процессы и методология
 
 - [Руководство по Doc-Driven Development](doc-driven-development.md) — процесс работы с документами и ритуалы ревью.
 
 ## Архитектура и проектирование
 
-- [Архитектурный обзор](architecture-overview.md) — целевой поток платформы и зоны ответственности компонентов.
-- [Шаблон сервиса: app-base-go-react](service-template-app-base-go-react.md) — структура монорепозитория, стандарты, расширение.
+- [Архитектурный обзор](architecture-overview.md) — целевой поток платформы, мультирепозиторная архитектура и зоны ответственности компонентов.
+- [Шаблон сервиса: app-base-go-react](service-template-app-base-go-react.md) — GitHub template для новых сервисов, структура, стандарты, расширение.
 
 ## API и контракты
 
