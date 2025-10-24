@@ -73,10 +73,15 @@
 
 **Отчет:** [LOGGING-STACK-DEPLOYED.md](reports/LOGGING-STACK-DEPLOYED.md)
 
-**Phase 2.3 - Tracing (TODO):**
-- [ ] Развернуть Tempo для distributed tracing
-- [ ] Настроить OpenTelemetry collectors
-- [ ] Интегрировать Tempo с Grafana
+**Phase 2.3 - Tracing - ✅ ЗАВЕРШЕНО:**
+- [x] Развернуть Tempo для distributed tracing (v2.8.2, 10Gi storage)
+- [x] Настроить OTLP receivers (gRPC 4317, HTTP 4318)
+- [x] Интегрировать Tempo с Grafana (data source configured)
+- [x] Настроить traces-to-logs correlation с Loki
+- [x] Настроить traces-to-metrics correlation с Prometheus
+- [x] Включить Service Map и Node Graph
+
+**Отчет:** [TRACING-STACK-DEPLOYED.md](reports/TRACING-STACK-DEPLOYED.md)
 
 **Phase 2.4 - Security & Secrets (TODO):**
 - [ ] Интегрировать SOPS + Vault для секретов
