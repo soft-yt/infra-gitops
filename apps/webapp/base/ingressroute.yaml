@@ -1,0 +1,26 @@
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: webapp-ingress
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: Host(`pod.dev.tulupov.org`) && PathPrefix(`/webapp`)
+      kind: Rule
+      services:
+        - name: webapp
+          port: 80
+      middlewares:
+        - name: webapp-stripprefix
+  tls:
+    certResolver: letsencrypt
+---
+apiVersion: traefik.io/v1alpha1
+kind: Middleware
+metadata:
+  name: webapp-stripprefix
+spec:
+  stripPrefix:
+    prefixes:
+      - /webapp

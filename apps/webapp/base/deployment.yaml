@@ -29,6 +29,19 @@ spec:
           value: "info"
         - name: APP_ENV
           value: "production"
+        - name: DATABASE_HOST
+          value: "postgres"
+        - name: DATABASE_PORT
+          value: "5432"
+        - name: DATABASE_NAME
+          value: "softyt"
+        - name: DATABASE_USER
+          value: "postgres"
+        - name: DATABASE_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: postgres-secret
+              key: POSTGRES_PASSWORD
         # OpenTelemetry configuration
         - name: OTEL_ENABLED
           value: "true"
