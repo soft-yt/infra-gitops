@@ -23,6 +23,7 @@ archive/
 
 ### 2. phase1/ - Phase 1: Foundation
 Отчеты о реализации Phase 1 (Service + Repository layers):
+- `phase1-foundation-spec.md` - Исходная DDD/TDD спецификация Phase 1
 - `PHASE1-IMPLEMENTATION-REPORT.md` - Детальный отчет реализации
 - `PHASE1-FINAL-STATUS.md` - Финальный статус и достижения
 - `PHASE1-SUMMARY.md` - Краткая сводка

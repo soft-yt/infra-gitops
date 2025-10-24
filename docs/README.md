@@ -50,6 +50,16 @@
 
 - [Дорожная карта внедрения](implementation-roadmap.md) — поэтапный план и журнал рисков.
 
+## Спецификации реализации (DDD/TDD)
+
+Детальные технические спецификации для каждой фазы разработки:
+
+### Активные фазы
+- **[Phase 2: Observability, Security & Secrets](phase2-observability-security-spec.md)** — SOPS, Vault, Prometheus, Grafana, Loki, Tempo, rate limiting, security testing, Traefik ingress (В РАБОТЕ)
+
+### Завершенные фазы
+- **[Phase 1: Foundation](archive/phase1/phase1-foundation-spec.md)** — Service + Repository layers, PostgreSQL, Clean Architecture (✅ ЗАВЕРШЕНО 2025-10-23, 73% coverage)
+
 ## Организация документации
 
 Документация организована по принципу Domain-Driven Development:

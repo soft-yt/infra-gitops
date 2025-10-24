@@ -24,10 +24,20 @@
 - [x] Обновить документацию для отражения мультирепозиторной архитектуры.
 
 ## Неделя 2: Расширение окружений - В ПРОЦЕССЕ
-- [x] Подключить кластеры (YC, VK, on-prem) и настроить мультикластерный sync ApplicationSet.
+
+### Phase 2: Observability, Security & Secrets - НАЧАТО 2025-10-24
+
+**Спецификация:** [phase2-observability-security-spec.md](phase2-observability-security-spec.md)
+
+**Задачи:**
 - [ ] Интегрировать SOPS + Vault для секретов, описать процедуры управления ключами.
-- [ ] Развернуть ingress (Istio Gateway или Traefik) и привязать домены.
 - [ ] Установить стек наблюдаемости (Prometheus, Grafana, Loki, Tempo) с базовыми дашбордами.
+- [ ] Реализовать rate limiting и security middleware в backend.
+- [ ] Добавить security testing в CI/CD (OWASP Top 10).
+- [ ] Развернуть ingress (Traefik) и привязать домены.
+- [ ] Настроить cert-manager (Let's Encrypt + custom CA).
+- [ ] Интегрировать ExternalDNS для автоматического управления DNS.
+- [ ] Подключить кластеры (YC, VK, on-prem) и настроить мультикластерный sync ApplicationSet.
 - [ ] Подготовить CLI-генератор или Backstage template для создания сервисов.
 
 ## После второй недели
