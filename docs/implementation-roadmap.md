@@ -25,7 +25,24 @@
 
 ## Неделя 2: Расширение окружений - В ПРОЦЕССЕ
 
-### Phase 2: Observability, Security & Secrets - НАЧАТО 2025-10-24
+**Начало:** 2025-10-24
+**Фокус:** Инфраструктура + Phase 2 (Observability, Security, Secrets)
+
+### Задачи Week 2
+
+#### Infrastructure (YC Dev Cluster)
+- [x] Настроить Yandex Cloud CLI
+- [x] Создать service accounts с IAM ролями
+- [x] Создать Kubernetes cluster `soft-yt-dev`
+- [ ] Создать node group
+- [ ] Настроить kubectl
+- [ ] Установить Argo CD
+- [ ] Создать ApplicationSet для multi-cluster sync
+
+**Документация:** [infrastructure-platform.md](infrastructure-platform.md)
+**Automation:** `clusters/yc-dev/create-node-group.sh`, `clusters/yc-dev/argo-cd/install.sh`
+
+#### Phase 2: Observability, Security & Secrets
 
 **Спецификация:** [phase2-observability-security-spec.md](phase2-observability-security-spec.md)
 
@@ -37,7 +54,6 @@
 - [ ] Развернуть ingress (Traefik) и привязать домены.
 - [ ] Настроить cert-manager (Let's Encrypt + custom CA).
 - [ ] Интегрировать ExternalDNS для автоматического управления DNS.
-- [ ] Подключить кластеры (YC, VK, on-prem) и настроить мультикластерный sync ApplicationSet.
 - [ ] Подготовить CLI-генератор или Backstage template для создания сервисов.
 
 ## После второй недели
