@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: backend
-        image: ghcr.io/soft-yt/app-base-go-react-backend:latest
+        image: ghcr.io/soft-yt/app-base-go-react-backend:master-0038f13
         ports:
         - containerPort: 8080
           name: http
@@ -61,7 +61,7 @@ spec:
           failureThreshold: 3
 
       - name: frontend
-        image: ghcr.io/soft-yt/app-base-go-react-frontend:latest
+        image: ghcr.io/soft-yt/app-base-go-react-frontend:master-0038f13
         ports:
         - containerPort: 80
           name: http
