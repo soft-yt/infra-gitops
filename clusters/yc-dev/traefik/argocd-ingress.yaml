@@ -4,12 +4,12 @@ metadata:
   name: argocd-server-ingress
   namespace: argocd
   annotations:
-    traefik.ingress.kubernetes.io/router.entrypoints: websecure
-    traefik.ingress.kubernetes.io/router.tls: "true"
+    traefik.ingress.kubernetes.io/router.entrypoints: web,websecure
+    cert-manager.io/cluster-issuer: letsencrypt-prod
 spec:
   ingressClassName: traefik
   rules:
-    - host: argocd.dev.tulupov.org
+    - host: argo.dev.tulupov.org
       http:
         paths:
           - path: /
@@ -18,8 +18,8 @@ spec:
               service:
                 name: argocd-server
                 port:
-                  number: 443
+                  number: 80
   tls:
     - hosts:
-        - argocd.dev.tulupov.org
-      secretName: argocd-server-tls
+        - argo.dev.tulupov.org
+      secretName: argo-dev-tulupov-org-tls
