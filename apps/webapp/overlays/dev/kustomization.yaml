@@ -8,6 +8,7 @@ bases:
 
 patchesStrategicMerge:
   - deployment-patch.yaml
+  - postgres-patch.yaml
 
 configMapGenerator:
   - name: webapp-config

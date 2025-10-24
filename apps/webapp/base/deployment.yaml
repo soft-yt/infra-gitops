@@ -4,18 +4,15 @@ metadata:
   name: webapp
   labels:
     app: webapp
-    component: webapp
 spec:
   replicas: 1
   selector:
     matchLabels:
       app: webapp
-      component: webapp
   template:
     metadata:
       labels:
         app: webapp
-        component: webapp
     spec:
       imagePullSecrets:
       - name: ghcr-pull-secret

@@ -1,0 +1,91 @@
+# ExternalDNS configuration for Yandex Cloud
+# Using webhook provider: https://github.com/ismailbaskin/external-dns-yandex-webhook
+
+# Use webhook provider
+provider:
+  name: webhook
+  webhook:
+    image:
+      repository: ghcr.io/ismailbaskin/external-dns-yandex-webhook
+      tag: "1.0.0"
+    args:
+      - --folder-id=b1g5rh822asfv4vchtci
+      - --auth-key-file=/etc/kubernetes/externaldns-key.json
+    extraVolumeMounts:
+      - name: yandex-credentials
+        mountPath: /etc/kubernetes
+        readOnly: true
+    securityContext:
+      runAsUser: 65534
+      runAsNonRoot: true
+      allowPrivilegeEscalation: false
+      capabilities:
+        drop:
+          - ALL
+      readOnlyRootFilesystem: true
+
+# External DNS configuration
+sources:
+  - ingress
+  - service
+
+# DNS policy
+policy: sync  # upsert-only or sync
+
+# Domain filter - only manage these domains
+domainFilters:
+  - tulupov.org
+
+# Registry for tracking DNS records
+registry: txt
+txtOwnerId: externaldns-yc-dev
+
+# Logging
+logLevel: info
+logFormat: json
+
+# Interval between DNS updates
+interval: 1m
+
+# Trigger external DNS on startup
+triggerLoopOnEvent: true
+
+# Extra volumes
+extraVolumes:
+  - name: yandex-credentials
+    secret:
+      secretName: externaldns-yc-key
+      items:
+        - key: externaldns-key.json
+          path: externaldns-key.json
+
+# Service Account
+serviceAccount:
+  create: true
+  name: external-dns
+
+# RBAC
+rbac:
+  create: true
+
+# Resources
+resources:
+  limits:
+    memory: 128Mi
+  requests:
+    cpu: 10m
+    memory: 64Mi
+
+# Security context
+securityContext:
+  fsGroup: 65534
+  runAsNonRoot: true
+  runAsUser: 65534
+  seccompProfile:
+    type: RuntimeDefault
+
+# Pod security context
+podSecurityContext:
+  fsGroup: 65534
+  runAsNonRoot: true
+  runAsUser: 65534

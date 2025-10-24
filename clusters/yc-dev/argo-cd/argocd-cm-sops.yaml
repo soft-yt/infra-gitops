@@ -1,0 +1,45 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: argocd-cm
+  namespace: argocd
+  labels:
+    app.kubernetes.io/name: argocd-cm
+    app.kubernetes.io/part-of: argocd
+data:
+  # Enable Kustomize build options for SOPS
+  kustomize.buildOptions: --enable-alpha-plugins --enable-exec
+
+  # Configure SOPS plugin for Kustomize
+  configManagementPlugins: |
+    - name: kustomize-sops
+      init:
+        command: [sh, -c]
+        args:
+          - |
+            echo "Initializing SOPS plugin..."
+      generate:
+        command: [sh, -c]
+        args:
+          - |
+            # Decrypt SOPS files before kustomize build
+            if [ -f kustomization.yaml ] || [ -f kustomization.yml ]; then
+              # Find and decrypt all .enc.yaml files
+              find . -name '*.enc.yaml' -type f | while read -r file; do
+                echo "Decrypting $file..."
+                decrypted="${file%.enc.yaml}.yaml"
+                sops -d "$file" > "$decrypted"
+              done
+
+              # Run kustomize build
+              kustomize build .
+
+              # Clean up decrypted files
+              find . -name '*.enc.yaml' -type f | while read -r file; do
+                decrypted="${file%.enc.yaml}.yaml"
+                rm -f "$decrypted"
+              done
+            else
+              echo "No kustomization file found"
+              exit 1
+            fi
